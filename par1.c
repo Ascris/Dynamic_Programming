@@ -1,15 +1,22 @@
 #include <stdio.h>
-#define NC 3
-#define NR 7
+#define NC 3 //Number of columns
+#define NR 7 //Number of rows
 
 
-
+//Z and x from the algorithm
 int z[NC][NR];
 int x[NC][NR];
+
+//The matrix, initiliase here with some values
 int c[NC][NR]={0,3,4,4,4,4,4,
                 0,4,6,7,8,8,8,
                 0,2,4,6,7,8,9};
 
+/**
+*Used to display a matrix of int
+*
+*Need a char, which is the name of the matrix ('c','z' or 'x')
+*/
 void display(char car)
 {
     
@@ -35,7 +42,11 @@ void display(char car)
         }
     }
 }
-
+/**
+* Is used to initialise the matrix. Put all to zero and initialise the first column of z and x after c
+*
+*
+*/
 void init()
 {
     int loop1,loop2,loop3;
@@ -55,6 +66,14 @@ void init()
     }
 }
 
+/**
+* Run the algorithm on the matrix c
+* Fill matrixx and z
+*
+* First loop is used to see each column
+* Second is used to browse through the rows
+* The third lets us calculate the value for each z and x
+*/
 void run()
 {
     int loop1,loop2,loop3;
@@ -66,18 +85,25 @@ void run()
             
             for(loop3=0;loop3<=loop2;loop3++)
             {
+                //To understand this, go see your document. The principle is get the max value from the loop, i did this with an if condition
                 temp=c[loop1][loop3]+z[loop1-1][loop2-loop3];
-                printf("I found %d with c=%d and z[%d][%d]=%d | ",temp,c[loop2][loop3],loop1-1,loop2-loop3,z[loop1-1][loop2-loop3]);
+                //printf("I found %d with c=%d and z[%d][%d]=%d | ",temp,c[loop2][loop3],loop1-1,loop2-loop3,z[loop1-1][loop2-loop3]);
                 if(temp>=z[loop1][loop2])
                 {
                    z[loop1][loop2]=temp;
                    x[loop1][loop2]=loop3; 
                 }
             }
-            printf("\n");
+            //printf("\n");
         }
     }
 }
+
+/**
+* Let us see the results from the z and x, and calculate the total profit and the optimal solution based on the two matrix
+*
+*
+*/
 
 void result()
 {
@@ -103,6 +129,10 @@ void result()
     printf("]\n");
 }
 
+/**
+* A simple main
+*
+*/
 int main()
 {
     init();
