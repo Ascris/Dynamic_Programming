@@ -19,7 +19,7 @@ typedef struct item item;
 
 int main(int argc, char* argv[])
 {
-    item* tabItem = (item*)malloc(400*sizeof(item));
+    item* tabItem;// = (item*)malloc(400*sizeof(item));
     int indRempTabItem = 0; //indice de remplissage du tableau d'items (vector ou pas vector ?)
     
     //fichier à prendre en compte
@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 	  string ligne;
 	  int nbLignes = 0;
 	  while(getline(fichier, ligne)){
-	    if(nbLignes > 0){
+	      if(nbLignes > 0){
 	      int tailleLigne = 0;
 	      string mot;
 	      istringstream line(ligne);
@@ -37,7 +37,19 @@ int main(int argc, char* argv[])
 		++tailleLigne;
 	      }
 	      
-	      if(tailleLigne == 3){
+	      if(tailleLigne == 2){
+		int nbItems, sizeKS;
+		string mot;
+		istringstream line(ligne);
+		int nbMot = 0;
+		while(line >> mot){
+		    if(nbMot == 0) nbItems = std::stoi(mot);
+		    else if (nbMot == 1) sizeKS = std::stoi(mot);
+		}
+		//allocation de la memoire necessaire au stokage de tous les items
+		tabItem = (item*)malloc(nbItems*sizeof(item));
+		
+	      } else if(tailleLigne == 3){
 		int x1, x2, x3;
 		string mot;
 		istringstream line(ligne);
