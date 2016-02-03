@@ -11,8 +11,8 @@ using namespace std;
 
 struct item{
     int id;
-    int value;
-    int cost;
+    int a;
+    int c;
 };
 typedef struct item item;
 
@@ -46,6 +46,7 @@ int main(int argc, char* argv[])
 		while(line >> mot){
 		    if(nbMot == 0) nbItems = stoi(mot);
 		    else if (nbMot == 1) sizeKS = stoi(mot);
+		    printf("nbItems = %d ; sizeKS = %d", nbItems, sizeKS);
 		}
 		//allocation de la memoire necessaire au stokage de tous les items
 		tabItem = (item*)malloc(nbItems*sizeof(item));
@@ -65,8 +66,8 @@ int main(int argc, char* argv[])
 		// x2, x2, x3 a mettre dans une structure
 		item new_item;
 		new_item.id = x1;
-		new_item.value = x2;
-		new_item.cost = x3;
+		new_item.a = x2;
+		new_item.c = x3;
 		tabItem[indRempTabItem] = new_item;
 		++indRempTabItem;
 	      }

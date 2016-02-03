@@ -1,0 +1,8 @@
+KS: main.o
+	g++ -o main.o
+
+main.o: main.c
+	g++ -c main.c -Wall -std=c++11
+
+clean:
+	rm -rf *.o
