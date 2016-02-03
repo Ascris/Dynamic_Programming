@@ -21,6 +21,7 @@ int main(int argc, char* argv[])
 {
     item* tabItem;// = (item*)malloc(400*sizeof(item));
     int indRempTabItem = 0; //indice de remplissage du tableau d'items (vector ou pas vector ?)
+    int nbItems, sizeKS;
     
     //fichier à prendre en compte
      ifstream fichier("GARNIER_Antoine.txt");
@@ -38,13 +39,13 @@ int main(int argc, char* argv[])
 	      }
 	      
 	      if(tailleLigne == 2){
-		int nbItems, sizeKS;
+// 		int nbItems, sizeKS;
 		string mot;
 		istringstream line(ligne);
 		int nbMot = 0;
 		while(line >> mot){
-		    if(nbMot == 0) nbItems = std::stoi(mot);
-		    else if (nbMot == 1) sizeKS = std::stoi(mot);
+		    if(nbMot == 0) nbItems = stoi(mot);
+		    else if (nbMot == 1) sizeKS = stoi(mot);
 		}
 		//allocation de la memoire necessaire au stokage de tous les items
 		tabItem = (item*)malloc(nbItems*sizeof(item));
@@ -55,9 +56,9 @@ int main(int argc, char* argv[])
 		istringstream line(ligne);
 		int nbMot = 0;
 		while(line >> mot){
-		  if(nbMot == 0) x1 = std::stoi(mot);
-		  else if (nbMot == 1) x2 = std::stoi(mot);
-		    else x3 = std::stoi(mot);
+		  if(nbMot == 0) x1 = stoi(mot);
+		  else if (nbMot == 1) x2 = stoi(mot);
+		    else x3 = stoi(mot);
 		  
 		  ++nbMot;
 		}
@@ -72,6 +73,18 @@ int main(int argc, char* argv[])
 	    } //premiere ligne particuliere
 	      ++nbLignes;
 	  }
+	  
+	  //LECTURE FICHIER FINIE
+	  
+	  
+	  //affichage des valeurs ?
+	  cout << "Capacite du sac : " << sizeKS << endl;
+	  int i;
+	  for(i = 0; i < nbItems; ++i){
+	    cout << "Item " << tabItem[i].id << endl;
+	  }
+	  
+	  
 	} else {
 	    cerr << "Impossible d'ouvrir le fichier";
 	}
