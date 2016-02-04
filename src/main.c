@@ -191,7 +191,7 @@ void loadFile(char* filename, int *n, int *b, item **it)
 		int nb_noeuds=atoi(ligne1[0]);
         int capacity=atoi(ligne1[1]);
         
-        printf("%d %d",nb_noeuds,capacity);
+        printf("Fichier avec les caractéristiques : %d %d\n",nb_noeuds,capacity);
         
         *it=(item*)malloc(sizeof(item)*nb_noeuds);
 		
@@ -228,11 +228,21 @@ void loadFile(char* filename, int *n, int *b, item **it)
 	}
 }
 
-int main()
+int main(int argc, char* argv[])
 {
     int n,b;
     item *it;
-    char c[]="./txtfiles/GARNIER_Antoine.txt";
+    char c[60]="./txtfiles/";
+    if(argc>1)
+    {
+        strcat(c,argv[1]);
+        strcat(c,".txt");
+    }
+    else
+    {
+        strcat(c,"GARNIER_Antoine.txt");
+    }
+    
     
     loadFile(c,&n,&b,&it);
 }
