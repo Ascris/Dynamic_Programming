@@ -154,5 +154,12 @@ int main(int argc, char* argv[])
     
     
     loadFile(c,&n,&b,&it);
+    
+    
+    //TODO test of the 2nd part
+    
+    
+    
+    
 }
 
