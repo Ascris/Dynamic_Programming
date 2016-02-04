@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include <sys/timeb.h>
+
 struct item{
     int id;
     int a;
@@ -23,6 +25,11 @@ int alpha;
 int z[596][3203];
 //corresponding decision variable associated with the item N
 int x[596][3203];
+
+
+//CPU TIME
+struct timeb t0, t1;    /* Timers */
+double cpu_time;        /* Time */
 
 int get_file_size(char *file_name)
 {
@@ -226,6 +233,10 @@ int max(int a, int b){
 
 int main(int argc, char* argv[])
 {
+    //begining of timer
+    ftime(&t0);
+
+    
     if(argc>1)
     {
         strcat(c,argv[1]);
@@ -250,5 +261,9 @@ int main(int argc, char* argv[])
     printf("\nThe Optimal Profit is %d", getOptimalProfit());
     
 
+    //end of timer
+    ftime(&t1);
+    cpu_time = (double)(t1.time - t0.time) + (double)(t1.millitm-t0.millitm)/1000.0;
+    printf("\nCPU time : %f seconds.", cpu_time);
 }
 
