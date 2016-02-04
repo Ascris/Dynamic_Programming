@@ -237,6 +237,7 @@ int main(int argc, char* argv[])
     }
     
     loadFile(c,&n,&b,&it);
+
     
     //TODO test of the 2nd part
     //variables initialization
@@ -248,5 +249,6 @@ int main(int argc, char* argv[])
     
     printf("\nThe Optimal Profit is %d", getOptimalProfit());
     
+
 }
 
