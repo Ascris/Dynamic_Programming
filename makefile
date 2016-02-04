@@ -57,6 +57,6 @@ fclean: clean
 rodolphe: CFLAGS += -DRODOLPHE
 rodolphe: clean debug
 
-florian: CFLAGS += -DFLORIAN
-florian: clean debug
+antoine: CFLAGS += -DANTOINE
+antoine: clean debug
 
