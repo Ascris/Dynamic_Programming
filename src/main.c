@@ -18,6 +18,7 @@ char c[60]="./txtfiles/";
 int k;
 int alpha;
 
+//TODO recuperer les vraies valeurs du fichier txt lu !!
 //total profit of solving the 0-1 KP on the N first items with capacity B
 int z[596][3203];
 //corresponding decision variable associated with the item N
@@ -168,6 +169,7 @@ int initX(int k, int alpha){
     else return 0;
 }
 
+/*
 //recursive function which choose the best option (put item k in the KS or not) to increase the profit
 int getProfit(int k, int alpha){
     //to select or not to select k, that is the question
@@ -176,7 +178,7 @@ int getProfit(int k, int alpha){
 	int a = it[k].a;
 	int xk = x[k][alpha];
 	
-	int item1 = 0+getProfit(k-1,alpha);
+	int item1 = getProfit(k-1,alpha);
 	int item2 = c+getProfit(k-1, alpha-a);
 	
 	int maxFinal = max(item1, item2);
@@ -185,22 +187,9 @@ int getProfit(int k, int alpha){
 	return z[k-1][alpha];
     }
     
-    /*
-    
-    if((c*xk + getProfit(k-1, (alpha-(a*xk)))) > (getProfit(k-1, alpha))){
-	//printf("profit = %d", (c*xk + getProfit(k-1, (alpha-(a*xk)))));
-	x[k][alpha] = 1;
-	return (c*xk + getProfit(k-1, (alpha-(a*xk))));
-    } else {
-	x[k][alpha] = 0;
-	return (getProfit(k-1, alpha));
-    }
-    
-    */
-    
     return 0;
 }
-
+*/
 
 //building of the final array Z which will contain all the optimal values
 void computeProfit(){
@@ -208,12 +197,13 @@ void computeProfit(){
     for(k=0; k<n; ++k){
 	printf("\nk = %d", k);
 	for(alpha=0; alpha<b; ++alpha){
-	    if(k==0){
+	    if(0==k){
 		z[k][alpha] = initZ(k, alpha);
 		x[k][alpha] = initX(k, alpha);
+	    } else if(it[k-1].a <= alpha){
+		    z[k][alpha] = max(it[k-1].c + z[k-1][alpha-it[k-1].a],  z[k-1][alpha]);
 	    } else {
-// 		printf("k = %d ; alpha = %d", k, alpha);
-		z[k][alpha] = getProfit(k, alpha);
+		 z[k][alpha] = z[k-1][alpha];
 	    }
 	}
     }
