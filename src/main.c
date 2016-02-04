@@ -171,15 +171,32 @@ int initX(int k, int alpha){
 //recursive function which choose the best option (put item k in the KS or not) to increase the profit
 int getProfit(int k, int alpha){
     //to select or not to select k, that is the question
-    int c = it[k].c;
-    int a = it[k].a;
-    int xk = x[k][alpha];
+    if(k > 1){
+	int c = it[k].c;
+	int a = it[k].a;
+	int xk = x[k][alpha];
+	
+	int item1 = 0+getProfit(k-1,alpha);
+	int item2 = c+getProfit(k-1, alpha-a);
+	
+	int maxFinal = max(item1, item2);
+	return maxFinal;
+    } else {
+	return z[k-1][alpha];
+    }
     
-    if(c*xk + z[k-1][alpha-(a*xk)] > z[k-1][alpha] ){
+    /*
+    
+    if((c*xk + getProfit(k-1, (alpha-(a*xk)))) > (getProfit(k-1, alpha))){
+	//printf("profit = %d", (c*xk + getProfit(k-1, (alpha-(a*xk)))));
+	x[k][alpha] = 1;
 	return (c*xk + getProfit(k-1, (alpha-(a*xk))));
     } else {
+	x[k][alpha] = 0;
 	return (getProfit(k-1, alpha));
     }
+    
+    */
     
     return 0;
 }
@@ -187,19 +204,16 @@ int getProfit(int k, int alpha){
 
 //building of the final array Z which will contain all the optimal values
 void computeProfit(){
-    int k, alpha, max = -1;
+    int k, alpha;
     for(k=0; k<n; ++k){
+	printf("\nk = %d", k);
 	for(alpha=0; alpha<b; ++alpha){
 	    if(k==0){
 		z[k][alpha] = initZ(k, alpha);
 		x[k][alpha] = initX(k, alpha);
 	    } else {
+// 		printf("k = %d ; alpha = %d", k, alpha);
 		z[k][alpha] = getProfit(k, alpha);
-		if(getProfit(k, alpha) > getProfit(k-1, alpha)){
-		    x[k][alpha] = 1;
-		} else {
-		    x[k][alpha] = 0;
-		}
 	    }
 	}
     }
@@ -208,6 +222,12 @@ void computeProfit(){
 
 int getOptimalProfit(){
     return z[n-1][b-1];
+}
+
+//easier to read
+int max(int a, int b){
+    if(a>b) return a;
+    else return b;
 }
 
 /*
@@ -232,6 +252,7 @@ int main(int argc, char* argv[])
     //variables initialization
     k = n;
     alpha = b;
+    
     
     computeProfit();
     
