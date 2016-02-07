@@ -1,6 +1,9 @@
 TARGET = ks.exe
 
-SRCS = main.c\
+SRCS = part2.c\
+        part1.c\
+        main.c\
+        
 #to add a file, put filename.extension\ before
 
 OBJ_DIR = ./obj
