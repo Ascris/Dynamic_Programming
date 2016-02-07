@@ -32,9 +32,9 @@ int main(int argc, char* argv[])
         else if(argv[1][0]=='2')
         {
             char c[60]="./txtfiles/";
-            if(argc>2)
+            if(argc==3)
             {
-                strcat(c,argv[1]);
+                strcat(c,argv[2]);
                 strcat(c,".txt");
             }
             else
